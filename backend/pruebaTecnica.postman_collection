@@ -1,0 +1,622 @@
+{
+  "info": {
+    "_postman_id": "67e7b232-3d49-4768-bcf3-3c148ac37777",
+    "name": "API Laravel 12 - Prueba Técnica",
+    "description": "Colección completa de endpoints para la API REST con Laravel 12 y PostgreSQL",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "42542039"
+  },
+  "item": [
+    {
+      "name": "Auth - Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Daniel Ochoa\",\n  \"email\": \"daniel@gmail.com\",\n  \"password\": \"12345678\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/register",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"daniel@gmail.com\",\n  \"password\": \"12345678\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/login",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth - Logout",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/logout",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "logout"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth - Me",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/me",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth - Get Avatar",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/me",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth - Upload Avatar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "avatar",
+              "type": "file",
+              "src": "/C:/Users/Nestor/Desktop/raiden.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/me/avatar",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "me",
+            "avatar"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tasks - List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/tasks",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "tasks"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tasks - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json ",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"titulo\": \"Cuarta tarea de Daniel\",\n  \"descripcion\": \"Descripción de prueba 4\",\n  \"fecha_limite\": \"2028-12-25\",\n  \"latitud\": 93.033,\n  \"longitud\": 36.303\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/tasks",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "tasks"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tasks - Show",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/tasks/4",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "tasks",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tasks - Update",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"titulo\": \"Primera Tarea\",\n  \"completada\": true\n}"
+        },
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/tasks/3",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "tasks",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tasks - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/tasks/1",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "tasks",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tasks - Assign Tags",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tags\": [1,2]\n}"
+        },
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/tasks/3/tags",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "tasks",
+            "3",
+            "tags"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tasks - Remove Tag",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/tasks/3/tags/3",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "tasks",
+            "3",
+            "tags",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tags - List",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/tags",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "tags"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tags - Create",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Trabajo\",\n  \"color\": \"#0000FF\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/tags",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "tags"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tags - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/tags/1",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "tags",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetUser",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Geralt\",\r\n  \"email\": \"geralt@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://throat-agreeing-thirsting.ngrok-free.dev/api/show/2",
+          "protocol": "https",
+          "host": [
+            "throat-agreeing-thirsting",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "show",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "5|HSpt68MmycSPryObcdC1FgG8yAY5sglrKcsjTTtd8bfd7c1f",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/delete/6",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "delete",
+            "6"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
