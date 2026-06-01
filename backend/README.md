@@ -6,8 +6,8 @@ Al mismo tiempo, las tareas personales para cada usuario, en los cuales se puede
 ## Requisitos
 - PHP 8.2+
 - Composer
-- PostgreSQL
-- Node.js & npm (opcional para frontend)
+- PostgreSQL 18
+- Node.js 24.15.0 & npm 11.12.1
 - Postman (para pruebas)
 
 

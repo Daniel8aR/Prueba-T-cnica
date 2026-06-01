@@ -4,8 +4,8 @@ La app permite a los usuarios autenticarse, gestionar sus tareas y su perfil, in
 
 
 ## Requisitos
-- Node.js >= 18 (probado con v24.15.0)
-- npm >= 9 (probado con v11.12.1)
+- Node.js >= v24.15.0
+- npm >= 11.12.1
 - React Native CLI (incluido al crear el proyecto con `npx react-native init`)
 - Android Studio con:
   - Android SDK Platform 33 (Android 16) recomendado
@@ -24,7 +24,7 @@ La app permite a los usuarios autenticarse, gestionar sus tareas y su perfil, in
 
 ## Configuración adicional recomendada
 1. Instalar JDK
-  - Instalar JDK 11 o superior
+  - Instalar JDK 17
   - Después, se tendrá que configurar la variable de entorno 'JAVA_HOME' apuntando al directorio del JDK.
     Por ejemplo: 'C:\Program Files\Java\jdk-17'.
 

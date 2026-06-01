@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Task\CreateTaskRequest;
 use App\Http\Requests\Task\UpdateTaskRequest;
 use App\Http\Requests\Task\ToggleTaskRequest;
-use App\Models\Tasks;
 use Illuminate\Http\Request;
-use \App\Models\Tags;
 use Carbon\Carbon;
 use App\Services\TaskService; 
 
@@ -52,6 +50,8 @@ class TaskController extends Controller {
     // Obtener una tarea por id del usuario autenticado
     public function getTask(Request $request, String $id){
         $task = $this->taskService->getTask($request->user(), $id);
+        if (!$task) return response()->json(['message' => 'Task not found'], 404);
+        if ($task === 'forbidden') return response()->json(['message' => 'Forbidden'], 403);
 
         return response()->json([
             'task' => $task,
