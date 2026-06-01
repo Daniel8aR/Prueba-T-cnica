@@ -20,13 +20,8 @@ export default function SignUpScreen( {navigation}: any) {
         
         if (data.data.success){
             const data1 = await login(correo, contrasenia);
-            if (data1.data.success){
-                // console.log("Usuario autenticado:", data.data);
-                // console.log("id:", data.data.user.id);
-                // console.log("Email:", data.data.user.email);
-                // console.log("Name:", data.data.user.name);
+            if (data1.data.success)
                 navigation.navigate('Home')
-            }
         } else Alert.alert('Error al Crear Cuenta');
     }
 

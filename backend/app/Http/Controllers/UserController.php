@@ -1,24 +1,21 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\User\RegisterUserRequest;
 use App\Http\Requests\User\LoginUserRequest;
 use App\Http\Requests\User\UploadAvatarRequest;
-use Illuminate\Support\Facades\Hash;
+use App\Services\UserService; 
 
 class UserController extends Controller {
+    protected $userService;
+
+    public function __construct(UserService $userService) {
+        $this->userService = $userService;
+    }
+    
     // Registrar un nuevo usuario
     public function register(RegisterUserRequest $request){
-        $validated = $request->validated();
-
-        $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-        ]);
-
-        $token = $user->createToken('auth_token')->plainTextToken;
+        [$user, $token] = $this->userService->register($request->validated());
 
         return response()->json([
             'success' => true,
@@ -33,33 +30,25 @@ class UserController extends Controller {
     
     // Iniciar sesión de un usuario existente
     public function login(LoginUserRequest $request){
-        $validated = $request->validated();
+        $result = $this->userService->login($request->validated());
 
-        $user = User::where('email', $validated['email'])->first();
-        if (!$user || !Hash::check($validated['password'], $user->password)){
+        if (!$result) {
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid credentials'
             ], 401);
         }
 
-        $token = $user->createToken('auth_token')->plainTextToken;
-
         return response()->json([
             'success' => true,
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'avatar' => $user->avatar ? asset('storage/'.$user->avatar) : null,
-            ],
-            'token' => $token, 
+            'user' => $result['user'],
+            'token' => $result['token'],
         ], 200);
     }
     
     // Cerrar sesión del usuario autenticado
     public function logOut(Request $request){
-        $request->user()->currentAccessToken()->delete();
+        $this->userService->logOut($request->user());
 
         return response()->json([
             'success' => true,
@@ -69,15 +58,10 @@ class UserController extends Controller {
     
     // Obtener información del usuario autenticado
     public function me(Request $request){
-        $user = $request->user();
+        $user = $this->userService->me($request->user());
         return response()->json([
             'success' => true,
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'avatar' => $user->avatar ? asset('storage/'.$user->avatar) : null,
-            ]
+            'user' => $user,
         ], 200);
     }
 
@@ -94,27 +78,23 @@ class UserController extends Controller {
         $extension = strtolower($request->file('avatar')->extension());
         if (in_array($extension, ['jpeg','jpg','tiff']))
             $exif = @exif_read_data($request->file('avatar')->getPathname());
-
+        
         // Obtener el usuario autenticado gracias a Sanctum
         $user = $request->user();
-        // Actualizar el campo avatar en la base de datos
-        $user->avatar = $path;
-        $user->avatar_exif = $exif ? json_encode($exif) : null;
-        $user->save();
+        $result = $this->userService->uploadAvatar($user, $path, $exif);
 
         return response()->json([
             'success' => true,
             'message' => 'Avatar uploaded successfully',
-            'avatar_url' => asset('storage/'.$path),
+            'avatar_url' => $result['avatar_url'],
         ], 201);
     }
     
     // Eliminar un usuario por id
     public function delete(String $id){
-        $user = User::find($id);
-        if (!$user) return response()->json(['message' => 'User not found'], 404);
+        $result = $this->userService->delete($id);
+        if (!$result) return response()->json(['message' => 'User not found'], 404);
         
-        $user->delete();
         return response()->json([
             'success' => true,
             'message' => 'User deleted'

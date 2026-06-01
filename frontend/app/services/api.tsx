@@ -1,4 +1,4 @@
-// api.js
+// app/services/api.tsx
 // La configuración de Axios para la comunicación con el backend
 import axios from 'axios';
 

@@ -47,7 +47,21 @@ DB_PASSWORD=contraseña
 ## Montar servidor local
 Levantar el servidor de desarrollo: 
 # php artisan serve
-La API estará disponible en: https://throat-agreeing-thirsting.ngrok-free.dev
+La API estará disponible en: http://127.0.0.1:8000
+
+## Exponer API con Ngrok
+Para acceder desde un dispositivo físico hay que seguir los pasos:
+1. Instalar ngrok desde https://ngrok.com y configurar tu authtoken:
+#ngrok config add-authtoken TU_AUTHTOKEN 
+
+Después, con el servidor corriendo en el puerto 8000, hay que abrir otra terminal y ejecutar:
+# ngrok http 8000
+
+Copia la URL pública que te da ngrok y actualizarlo en el .env.
+Por ejemplo: 
+APP_URL=https://throat-agreeing-thirsting.ngrok-free.dev
+
+Esa misma Url habrá que copiarla en el archivo 'app/services/api.tsx' del frontend
 
 
 ## Endpoints principales

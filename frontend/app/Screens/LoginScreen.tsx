@@ -21,12 +21,6 @@ export default function LoginScreen( {navigation}: any ) {
       const data = await login(correo, contrasenia);
 
       if (data.data.success){
-        // console.log("Usuario autenticado:", data.data);
-        // console.log("id:", data.data.user.id);
-        // console.log("Email:", data.data.user.email);
-        // console.log("Name:", data.data.user.name);
-        // console.log("Avatar:", data.data.user.avatar);
-
         // Si el inicio de sesión es exitoso, navega a la pantalla 'Home'.
         navigation.navigate('Home')
       } else Alert.alert('Error al Iniciar Sesión');

@@ -1,12 +1,19 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\Tags;
+
 use App\Http\Requests\Tag\CreateTagRequest;
+use App\Services\TagService;
 
 class TagController extends Controller {
+    protected $tagService;
+
+    public function __construct(TagService $tagService) {
+        $this->tagService = $tagService;
+    }
+
     // Obtener todas las etiquetas
     public function tags(){
-        $tags = Tags::all();
+        $tags = $this->tagService->getAllTags();
         return response()->json($tags, 200);
     }
 
@@ -14,7 +21,7 @@ class TagController extends Controller {
     public function createTag(CreateTagRequest $request){
         $validated = $request->validated();
 
-        $tag = Tags::create($validated);
+        $tag = $this->tagService->createTag($validated);
 
         return response()->json([
             'tag' => [
@@ -29,10 +36,9 @@ class TagController extends Controller {
 
     // Eliminar una etiqueta por id
     public function deleteTag(String $id){
-        $tag = Tags::find($id);
-        if (!$tag) return response()->json(['message' => 'Tag not found'], 404);
-        
-        $tag->delete();
+        $result = $this->tagService->deleteTag($id);
+        if (!$result) return response()->json(['message' => 'Tag not found'], 404);
+
         return response()->json([
             'message' => 'Tag deleted'
         ], 200);
